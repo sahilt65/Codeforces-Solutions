@@ -3,31 +3,45 @@ using namespace std;
 
 #define ll long long
 
+ 
+void dfs(ll s,ll p,vector<ll> adj[],vector<ll> &leaf){
+    bool any=false;
+    
+    for(auto e : adj[s]){
+        if(e==p) continue;
+        any = true;
+        dfs(e, s, adj, leaf);
+        leaf[s] += leaf[e];
+    }
+    
+    if(!any) leaf[s]++;
+}
+
 void solve(){
     int n;
     cin>>n;
 
-    vector<vector<ll>> v(n+1);
+    vector<ll> v[n+1];
 
     for(int i = 0; i<n-1; i++){
         ll a, b;
-
-        if(a<b) v[a].push_back(b);
-        else v[b].push_back(a);
+        cin>>a>>b;
+        v[a].push_back(b);
+        v[b].push_back(a);
     }
 
     int q;
     cin>>q;
 
+    vector<ll> leaf(n+1, 0);
+    dfs(1, -1, v, leaf);
+
     while(q--){
-        ll a, b;
+        ll a,b;
         cin>>a>>b;
 
-        set<ll> s;
-
-        for(auto i : v[a]){
-            
-        }
+        ll ans = leaf[a] * leaf[b];
+        cout<<ans<<endl;
     }
 }
 int main() {
