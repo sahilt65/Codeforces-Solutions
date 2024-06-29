@@ -35,7 +35,6 @@ void solve() {
         }
         cout<<endl;
     }
-
 }
 int main() {
     int t; 
