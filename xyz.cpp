@@ -1,37 +1,52 @@
+#include <iostream>
+#include <regex>
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
 
-void solve(vector<int> &v) {
-    set<int> s;
-    for(int i = 0; i<v.size(); i++){
-        vector<int> temp;
-        int t = v[i];
+std::string validate_ip_address(const std::string& ip) {
+    // Regular expressions for IPv4 and IPv6
+    std::regex ipv4_pattern(R"((\d{1,3}\.){3}\d{1,3})");
+    std::regex ipv6_pattern(R"([0-9a-fA-F:]+)");
 
-        while(t>0){
-            int curr = t % 10;
-            t /= 10;
-            temp.push_back(curr);
+    if (std::regex_match(ip, ipv4_pattern)) {
+        // Further validation to ensure each segment is between 0 and 255
+        stringstream ss(ip);
+        string segment;
+        bool valid = true;
+        while (std::getline(ss, segment, '.')) {
+            int part = std::stoi(segment);
+            if (part < 0 || part > 255) {
+                valid = false;
+                break;
+            }
         }
-        reverse(temp.begin(), temp.end());
-        if(temp[temp.size()- 1] == 0){
-            temp.pop_back();
-        }
-
-        sort(temp.rbegin(), temp.rend());
-
-        for(int j = 0; j<temp.size(); j++){
-            s.insert(temp[i]);
+        if (valid) {
+            return "IPv4";
         }
     }
 
-    for(auto i : s){
-        cout<<i<<" ";
+    if (std::regex_match(ip, ipv6_pattern)) {
+        // Further validation to ensure the address conforms to IPv6 standards
+        std::stringstream ss(ip);
+        std::string segment;
+        int count = 0;
+        while (std::getline(ss, segment, ':')) {
+            count++;
+        }
+        if (count <= 8) {
+            return "IPv6";
+        }
     }
-    cout<<endl;
+
+    return "Neither";
 }
+
 int main() {
-    vector<int> v = {3560, 105, 694, 23, 690};
-    solve(v);
+    std::cout << validate_ip_address("192.168.1.1") << std::endl;    // Output: IPv4
+    std::cout << validate_ip_address("2001:0db8:85a3:0000:0000:8a2e:0370:7334") << std::endl;  // Output: IPv6
+    std::cout << validate_ip_address("256.256.256.256") << std::endl; // Output: Neither
+    std::cout << validate_ip_address("1234:5678:9abc:def::1234") << std::endl; // Output: IPv6
+    std::cout << validate_ip_address("not an IP address") << std::endl; // Output: Neither
+
     return 0;
 }
