@@ -1,0 +1,1 @@
+{"name":"Local: 1891C","url":"/Applications/Development/codeforces_solutions/1891C.cpp","tests":[{"id":1721479905632,"input":"4\n4\n1 3 1 1\n4\n1 2 1 1\n6\n3 2 1 5 2 4\n2\n1 6\n","output":"4\n4\n11\n5\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Applications/Development/codeforces_solutions/1891C.cpp","group":"local","local":true}

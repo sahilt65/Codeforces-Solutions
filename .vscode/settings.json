@@ -4,6 +4,8 @@
         "iostream": "cpp",
         "iosfwd": "cpp",
         "string": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "set": "cpp",
+        "valarray": "cpp"
     }
 }

@@ -1,0 +1,1 @@
+{"name":"Local: 1924A","url":"/Applications/Development/codeforces_solutions/1924A.cpp","tests":[{"id":1721283723707,"input":"3\n2 2 4\nabba\n2 2 3\nabb\n3 3 10\naabbccabab\n","output":"YES\nNO\naa\nNO\nccc\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Applications/Development/codeforces_solutions/1924A.cpp","group":"local","local":true}
